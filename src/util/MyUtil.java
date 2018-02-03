@@ -37,7 +37,12 @@ public class MyUtil {
 			resObj.put("totalPage", totalPage);
 			resObj.put("totalRow", totalRow);
 			resObj.put("firstPage", pageNumber == 1 ? true : false);
-			resObj.put("lastPage", pageNumber == totalPage ? true : false);
+			boolean lastPage;
+			if (totalPage == 0)
+				lastPage = true;
+			else
+				lastPage = pageNumber == totalPage;
+			resObj.put("lastPage", lastPage);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

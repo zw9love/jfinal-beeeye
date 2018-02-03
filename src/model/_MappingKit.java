@@ -17,7 +17,9 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("common_user", "id", User.class);
-		arp.addMapping("common_menu", "id", Menu.class);
+		arp.addMapping("common_user", "ids", User.class);
+		arp.addMapping("common_menu", "ids", Menu.class);
+		arp.addMapping("common_setting", "ids", Setting.class);
+		arp.addMapping("beeneedle_process_subject", "ids", ProcessSubject.class);
 	}
 }

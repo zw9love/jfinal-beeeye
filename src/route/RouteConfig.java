@@ -13,7 +13,10 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
 import controller.BeeeyeMenuController;
+import controller.BeeeyeRoleController;
+import controller.BeeeyeSettingController;
 import controller.BeeeyeUserController;
+import controller.BeeneedleProcessSubjectController;
 import controller.IndexController;
 import controller.LoginController;
 import model._MappingKit;
@@ -60,9 +63,12 @@ public class RouteConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		// me.add("/", LoginController.class);
 		me.add("/", IndexController.class); // 第三个参数为该Controller的视图存放路径
-		me.add("/login", LoginController.class); // 第三个参数为该Controller的视图存放路径
-		me.add("/menu", BeeeyeMenuController.class); // 第三个参数省略时默认与第一个参数值相同，在此即为/blog
-		me.add("/user", BeeeyeUserController.class); // 第三个参数省略时默认与第一个参数值相同，在此即为/blog
+		me.add("/login", LoginController.class);
+		me.add("/menu", BeeeyeMenuController.class);
+		me.add("/user", BeeeyeUserController.class);
+		me.add("/role", BeeeyeRoleController.class);
+		me.add("/setting", BeeeyeSettingController.class);
+		me.add("/BeeneedleProcessSubject", BeeneedleProcessSubjectController.class);
 		// me.add("/blog", BlogController.class);
 	}
 
