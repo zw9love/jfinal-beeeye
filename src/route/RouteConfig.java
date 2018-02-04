@@ -12,6 +12,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
+import controller.BeeeyeHostController;
 import controller.BeeeyeMenuController;
 import controller.BeeeyeRoleController;
 import controller.BeeeyeSettingController;
@@ -67,6 +68,7 @@ public class RouteConfig extends JFinalConfig {
 		me.add("/", IndexController.class); // 第三个参数为该Controller的视图存放路径
 		me.add("/login", LoginController.class);
 		me.add("/menu", BeeeyeMenuController.class);
+		me.add("/host", BeeeyeHostController.class);
 		me.add("/user", BeeeyeUserController.class);
 		me.add("/role", BeeeyeRoleController.class);
 		me.add("/setting", BeeeyeSettingController.class);

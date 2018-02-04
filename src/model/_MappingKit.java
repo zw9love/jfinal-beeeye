@@ -17,6 +17,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("beeeye_host", "host_ids", Host.class);
 		arp.addMapping("common_user", "ids", User.class);
 		arp.addMapping("common_menu", "ids", Menu.class);
 		arp.addMapping("common_setting", "ids", Setting.class);
