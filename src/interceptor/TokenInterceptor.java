@@ -3,6 +3,7 @@ package interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.jfinal.aop.Interceptor;
@@ -30,11 +31,26 @@ public class TokenInterceptor implements Interceptor {
 			} else {
 				HttpSession session = request.getSession();
 				JSONObject loginObj = (JSONObject) session.getAttribute(token);
+				// 如果loginObj已经是null
 				if (loginObj == null) {
 					JSONObject json = MyUtil.getJson("用户登录失效", 606, "");
 					controller.renderJson(json.toString());
 				} else {
-					inv.invoke();
+					String loginName;
+					try {
+						loginName =(String) loginObj.get("login_name");
+						String sessionToken = (String) session.getAttribute(loginName);
+						// 两个token值相同
+						if(sessionToken.equals(token) ){
+							inv.invoke();
+						}else{
+							session.removeAttribute(token);
+							JSONObject json = MyUtil.getJson("用户登录失效", 606, "");
+							controller.renderJson(json.toString());
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
