@@ -24,6 +24,7 @@ public class LoginController extends Controller {
 		render("../login.html");
 	}
 
+	// @Before(LoginValidator.class)
 	public void dologin() throws JSONException {
 		// String ids = getPara();
 		// System.out.println("ids = " + ids);

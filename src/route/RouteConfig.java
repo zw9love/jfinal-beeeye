@@ -16,9 +16,11 @@ import controller.BeeeyeMenuController;
 import controller.BeeeyeRoleController;
 import controller.BeeeyeSettingController;
 import controller.BeeeyeUserController;
+import controller.BeeneedleProcessHostController;
 import controller.BeeneedleProcessSubjectController;
 import controller.IndexController;
 import controller.LoginController;
+import interceptor.TokenInterceptor;
 import model._MappingKit;
 
 /**
@@ -69,6 +71,7 @@ public class RouteConfig extends JFinalConfig {
 		me.add("/role", BeeeyeRoleController.class);
 		me.add("/setting", BeeeyeSettingController.class);
 		me.add("/BeeneedleProcessSubject", BeeneedleProcessSubjectController.class);
+		me.add("/BeeneedleProcessHost", BeeneedleProcessHostController.class);
 		// me.add("/blog", BlogController.class);
 	}
 
@@ -100,7 +103,7 @@ public class RouteConfig extends JFinalConfig {
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
-		System.out.println("拦截器");
+		me.add(new TokenInterceptor());
 	}
 
 	/**

@@ -21,5 +21,6 @@ public class _MappingKit {
 		arp.addMapping("common_menu", "ids", Menu.class);
 		arp.addMapping("common_setting", "ids", Setting.class);
 		arp.addMapping("beeneedle_process_subject", "ids", ProcessSubject.class);
+		arp.addMapping("beeneedle_process_host", "ids", ProcessHost.class);
 	}
 }
