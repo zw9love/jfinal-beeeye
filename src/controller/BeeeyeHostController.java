@@ -69,7 +69,7 @@ public class BeeeyeHostController extends Controller {
 
     public void put() {
         Map<String, Object> json = MyUtil.getJsonData(getRequest());
-        String ids = (String) json.get("ids");
+        String ids = (String) json.get("host_ids");
         String name = (String) json.get("name");
         String path = (String) json.get("path");
         Host bean = getBean(Host.class);
