@@ -1,5 +1,7 @@
 package route;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -12,15 +14,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
-import controller.BeeeyeHostController;
-import controller.BeeeyeMenuController;
-import controller.BeeeyeRoleController;
-import controller.BeeeyeSettingController;
-import controller.BeeeyeUserController;
-import controller.BeeneedleProcessHostController;
-import controller.BeeneedleProcessSubjectController;
-import controller.IndexController;
-import controller.LoginController;
+import controller.*;
 import interceptor.TokenInterceptor;
 import model._MappingKit;
 
@@ -74,7 +68,8 @@ public class RouteConfig extends JFinalConfig {
 		me.add("/setting", BeeeyeSettingController.class);
 		me.add("/BeeneedleProcessSubject", BeeneedleProcessSubjectController.class);
 		me.add("/BeeneedleProcessHost", BeeneedleProcessHostController.class);
-		// me.add("/blog", BlogController.class);
+		me.add("/BeeneedlePelf", BeeeyePelfController.class);
+		me.add("/SoftWare_SPEC/updown", BeeeyeSoftWareController.class);
 	}
 
 	public void configEngine(Engine me) {

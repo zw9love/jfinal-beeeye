@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import java.util.List;
 
 import org.json.JSONArray;
@@ -16,14 +18,14 @@ public class BeeeyeSettingController extends Controller {
 	private String tableName = "common_setting";
 
 	public void get() throws JSONException {
-		System.out.println("进入了get方法");
+//		System.out.println("进入了get方法");
 		String sql = "select * from " + tableName;
 		List<Setting> list = dao.find(sql);
-		System.out.println(list.toString());
+//		System.out.println(list.toString());
 		JSONArray postList = new JSONArray();
 		for (Setting setting : list) {
 			String[] Names = setting._getAttrNames();
-			System.out.println(Names.toString());
+//			System.out.println(Names.toString());
 			JSONObject obj = new JSONObject();
 			for (String param : Names) {
 				Object object = setting.get(param);

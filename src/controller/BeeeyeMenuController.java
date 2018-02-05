@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import java.util.List;
 
 import org.json.JSONArray;
@@ -16,10 +18,10 @@ public class BeeeyeMenuController extends Controller {
 	private String tableName = "common_menu";
 
 	public void get() throws JSONException {
-		System.out.println("进入了get方法");
+//		System.out.println("进入了get方法");
 		String sql = "select * from " + tableName;
 		List<Menu> list = dao.find(sql);
-		System.out.println(list.toString());
+//		System.out.println(list.toString());
 		JSONArray postList = new JSONArray();
 		for (Menu menu : list) {
 			String[] Names = menu._getAttrNames();

@@ -1,8 +1,11 @@
 package util;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -53,6 +56,20 @@ public class MyUtil {
 
 	}
 
+	public static JSONObject getSizeJson(JSONArray list, JSONObject size, int total) {
+		JSONObject resObj = new JSONObject();
+		try {
+			resObj.put("list", list);
+			resObj.put("total", total);
+			resObj.put("size", size);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return resObj;
+	}
+
+
 	public static String getRandomString() {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 24);
 		return uuid;
@@ -71,6 +88,23 @@ public class MyUtil {
 		}
 		String str = sb.toString();
 		Map<String, Object> list = new Gson().fromJson(str, new TypeToken<Map<String, Object>>() {
+		}.getType());
+		return list;
+	}
+
+	public static List<String> getListData(HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+		try (BufferedReader reader = request.getReader()) {
+			char[] buff = new char[1024];
+			int len;
+			while ((len = reader.read(buff)) != -1) {
+				sb.append(buff, 0, len);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String str = sb.toString();
+		List<String> list = new Gson().fromJson(str, new TypeToken<List<String>>() {
 		}.getType());
 		return list;
 	}

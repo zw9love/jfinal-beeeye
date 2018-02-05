@@ -1,5 +1,7 @@
 package model.base;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import com.jfinal.plugin.activerecord.IBean;
 import com.jfinal.plugin.activerecord.Model;
 

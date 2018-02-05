@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by admin on 2018/2/2.
+ */
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class BeeneedleProcessSubjectController extends Controller {
 		// System.out.println("ids = " + ids);
 		if (ids != null) {
 			ProcessSubject processSubject = dao.findById(ids);
-			System.out.println(processSubject.toString());
+//			System.out.println(processSubject.toString());
 			String[] Names = processSubject._getAttrNames();
 			JSONObject obj = new JSONObject();
 			for (String param : Names) {
