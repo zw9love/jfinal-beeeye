@@ -5,6 +5,7 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.plugin.activerecord.Db;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +18,7 @@ import util.MyUtil;
 
 public class BeeneedleProcessSubjectController extends Controller {
 	private static final ProcessSubject dao = new ProcessSubject().dao();
+	private final String tableName = "beeneedle_process_subject";
 
 	@SuppressWarnings("unchecked")
 	public void get() throws JSONException {
@@ -40,7 +42,7 @@ public class BeeneedleProcessSubjectController extends Controller {
 			int pageNumber = (int) Double.parseDouble(page.get("pageNumber").toString());
 			int pageSize = (int) Double.parseDouble(page.get("pageSize").toString());
 			Page<ProcessSubject> paginate = dao.paginate(pageNumber, pageSize, "select *",
-					"from beeneedle_process_subject");
+					" from " + tableName);
 			List<ProcessSubject> list = paginate.getList();
 			JSONArray postList = new JSONArray();
 			for (ProcessSubject processSubject : list) {
@@ -106,9 +108,18 @@ public class BeeneedleProcessSubjectController extends Controller {
 				jsonObj = MyUtil.getJson("失败，此ids不存在", 606, "");
 
 		} else {
-			jsonObj = MyUtil.getJson("url后面拼ids大哥", 606, "");
+			List<String> lists = MyUtil.getListData(getRequest());
+			String sql = "delete from " + tableName + " where ids in (";
+			for (int i = 0; i < lists.size(); i++) {
+				sql += i == lists.size() - 1 ? "'" + lists.get(i) + "')": "'" + lists.get(i) + "', ";
+			}
+			// System.out.println(sql);
+			int effectCount = Db.delete(sql);
+			if (effectCount >= 0)
+				jsonObj = MyUtil.getJson("成功", 200, "");
+			else
+				jsonObj = MyUtil.getJson("删除失败", 606, "");
 		}
-
 		renderJson(jsonObj.toString());
 	}
 

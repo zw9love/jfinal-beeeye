@@ -26,6 +26,7 @@ public class _MappingKit {
 		arp.addMapping("common_software_group", "ids", SoftwareInstall.class);
 		arp.addMapping("beeeye_pelf", "ids", Pelf.class);
 		arp.addMapping("beeneedle_process_subject", "ids", ProcessSubject.class);
+		arp.addMapping("beeneedle_object_label", "ids", ObjectLabel.class);
 		arp.addMapping("beeneedle_process_host", "ids", ProcessHost.class);
 	}
 }
