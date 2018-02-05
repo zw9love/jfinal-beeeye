@@ -33,7 +33,7 @@ public class TokenInterceptor implements Interceptor {
 				JSONObject loginObj = (JSONObject) session.getAttribute(token);
 				// 如果loginObj已经是null
 				if (loginObj == null) {
-					JSONObject json = MyUtil.getJson("用户登录失效", 606, "");
+					JSONObject json = MyUtil.getJson("用户登录失效", 611, "");
 					controller.renderJson(json.toString());
 				} else {
 					String loginName;
@@ -42,10 +42,12 @@ public class TokenInterceptor implements Interceptor {
 						String sessionToken = (String) session.getAttribute(loginName);
 						// 两个token值相同
 						if(sessionToken.equals(token) ){
+							loginObj.put("expireTime", MyUtil.getTime()); // 刷新过期时间
+							session.setAttribute(token, loginObj);
 							inv.invoke();
 						}else{
 							session.removeAttribute(token);
-							JSONObject json = MyUtil.getJson("用户登录失效", 606, "");
+							JSONObject json = MyUtil.getJson("用户登录失效", 611, "");
 							controller.renderJson(json.toString());
 						}
 					} catch (JSONException e) {

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,9 @@ public class LoginController extends Controller {
             for (String key : map.keySet()) {
                 obj.put(key, map.get(key));
             }
+            int expireTime = MyUtil.getTime();
+            obj.put("expireTime", expireTime);
+//            System.out.println(expireTime);
             // System.out.println(obj.toString());
             HttpSession session = getSession();
             String token = MyUtil.getRandomString();

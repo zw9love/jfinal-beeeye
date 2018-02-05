@@ -2,6 +2,7 @@ package util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -72,5 +73,9 @@ public class MyUtil {
 		Map<String, Object> list = new Gson().fromJson(str, new TypeToken<Map<String, Object>>() {
 		}.getType());
 		return list;
+	}
+
+	public static int getTime(){
+		return Math.round(new Date().getTime() / 1000) + 30 * 60;
 	}
 }

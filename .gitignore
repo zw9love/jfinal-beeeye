@@ -3,3 +3,4 @@ out
 jfinal.iml
 ./WebRoot/WEB-INF/classes
 *.class
+classes
