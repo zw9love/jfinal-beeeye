@@ -8,22 +8,28 @@ import util.MyUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class LoginValidator extends Validator {
-
-    @Override
-    protected void validate(Controller c) {
-        Map<String, Object> json = MyUtil.getJsonData(c.getRequest());
+public class LoginValidator extends MainValidator {
+    public boolean dologinValidate(Controller c, Map<String, Object> json) {
         String login_name = (String) json.get("login_name");
-        String login_pwd = MD5Util.encrypt(json.get("login_pwd").toString());
-        if(login_name.trim().equals("")){
-            c.renderJson(MyUtil.getJson("用户名不能为空", 606, ""));
-        }else if(login_pwd.trim().equals("")){
-            c.renderJson(MyUtil.getJson("密码不能为空", 606, ""));
+        String login_pwd = (String) json.get("login_pwd");
+        Boolean nameFlag = validateRequired(login_name);
+        Boolean pwdFlag = false;
+        if (nameFlag){
+            pwdFlag = validateRequired(login_pwd);
+            if (!pwdFlag)
+                c.renderJson(MyUtil.getJson("请输入密码", 606, "").toString());
         }
-    }
-
-    @Override
-    protected void handleError(Controller c) {
-        c.renderJson(MyUtil.getJson(" loginvalidator出错了", 606, ""));
+        else
+            c.renderJson(MyUtil.getJson("请输入用户名", 606, "").toString());
+        return nameFlag && pwdFlag;
     }
 }
+
+//public class LoginValidator extends MainValidator {
+//    public void dologinValidate(Controller c) {
+//    }
+//    @Override
+//    protected void handleError(Controller c) {
+//        c.renderJson(MyUtil.getJson("LoginValidator出错了", 606, ""));
+//    }
+//}

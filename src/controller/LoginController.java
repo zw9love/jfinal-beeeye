@@ -2,6 +2,7 @@ package controller;
 /**
  * Created by admin on 2018/2/2.
  */
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import annotation.MethodValidator;
 import com.jfinal.aop.Before;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,52 +23,46 @@ import util.MD5Util;
 import util.MyUtil;
 import validator.LoginValidator;
 
+//@Before(LoginValidator.class)
 public class LoginController extends Controller {
     public void index() {
-        // System.out.println("进来index方法了");
-        // renderText("Hello JFinal World.");
-        // System.out.println("进来了LoginController的index方法");
         render("../login.html");
     }
 
-    // @Before(LoginValidator.class)
+//    @MethodValidator(name="dologinValidate")
     public void dologin() throws JSONException {
-        // String ids = getPara();
-        // System.out.println("ids = " + ids);
         Map<String, Object> json = MyUtil.getJsonData(getRequest());
-        String login_name = (String) json.get("login_name");
-        String login_pwd = MD5Util.encrypt(json.get("login_pwd").toString());
-        JSONObject jsonObj = MyUtil.getJson("成功", 200, "");
-        // System.out.println("login_name = " + login_name);
-        // System.out.println("login_pwd = " + login_pwd);
-        List<Record> list = Db.find("SELECT * FROM common_user where login_name = ? and login_pwd = ? ", login_name,
-                login_pwd);
-
-        if (list.size() > 0) {
-            JSONObject obj = new JSONObject();
-            Map<String, Object> map = list.get(0).getColumns();
-            for (String key : map.keySet()) {
-                obj.put(key, map.get(key));
-            }
-            int expireTime = MyUtil.getTime();
-            obj.put("expireTime", expireTime);
+        if(new LoginValidator().dologinValidate(this, json)){
+            // System.out.println(json.toString());
+            String login_name = (String) json.get("login_name");
+            String login_pwd = MD5Util.encrypt(json.get("login_pwd").toString());
+            JSONObject jsonObj = MyUtil.getJson("成功", 200, "");
+            List<Record> list = Db.find("SELECT * FROM common_user where login_name = ? and login_pwd = ? ", login_name,
+                    login_pwd);
+            if (list.size() > 0) {
+                JSONObject obj = new JSONObject();
+                Map<String, Object> map = list.get(0).getColumns();
+                for (String key : map.keySet()) {
+                    obj.put(key, map.get(key));
+                }
+                int expireTime = MyUtil.getTime();
+                obj.put("expireTime", expireTime);
 //            System.out.println(expireTime);
-            // System.out.println(obj.toString());
-            HttpSession session = getSession();
-            String token = MyUtil.getRandomString();
-            session.setAttribute(token, obj);
-            session.setAttribute(list.get(0).get("login_name").toString(), token);
-            jsonObj = MyUtil.getJson("成功", 200, "");
-            HttpServletResponse response = getResponse();
-            response.setHeader("token", token);
-            renderJson(jsonObj.toString());
-        } else {
-            jsonObj = MyUtil.getJson("账号或者密码错误。", 606, "");
+                // System.out.println(obj.toString());
+                HttpSession session = getSession();
+                String token = MyUtil.getRandomString();
+                session.setAttribute(token, obj);
+                session.setAttribute(list.get(0).get("login_name").toString(), token);
+                jsonObj = MyUtil.getJson("成功", 200, "");
+                HttpServletResponse response = getResponse();
+                response.setHeader("token", token);
+                renderJson(jsonObj.toString());
+            } else {
+                jsonObj = MyUtil.getJson("账号或者密码错误。", 606, "");
+                renderJson(jsonObj.toString());
+            }
             renderJson(jsonObj.toString());
         }
-
-        renderJson(jsonObj.toString());
-
     }
 
     public void loged() throws JSONException {
