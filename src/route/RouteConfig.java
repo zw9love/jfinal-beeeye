@@ -52,6 +52,13 @@ public class RouteConfig extends JFinalConfig {
 		// 加载少量必要配置，随后可用PropKit.get(...)获取值
 		PropKit.use("jdbc_config.txt");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
+		String systemName = System.getProperty("os.name");
+		if(systemName.toLowerCase().contains("windows")){
+			System.out.println("windows操作系统");
+			me.setBaseUploadPath("C:\\jfinal-beeeye\\upload");
+		}else{
+			me.setBaseUploadPath("/usr/local/share/lpdata/tomcat/webapp");
+		}
 	}
 
 	/**

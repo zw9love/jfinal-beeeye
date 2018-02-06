@@ -14,6 +14,8 @@ import com.jfinal.core.Controller;
 
 import util.MyUtil;
 
+import java.util.Date;
+
 public class TokenInterceptor implements Interceptor {
 
 	@Override
@@ -43,8 +45,10 @@ public class TokenInterceptor implements Interceptor {
 //					try {
 //						loginName =(String) loginObj.get("login_name");
 //						String sessionToken = (String) session.getAttribute(loginName);
+//						int nowTime = Math.round(new Date().getTime() / 1000);
+//						int expireTime = (int)loginObj.get("expireTime");
 //						// 两个token值相同
-//						if(sessionToken.equals(token) ){
+//						if(sessionToken.equals(token) && expireTime >= nowTime){
 //							loginObj.put("expireTime", MyUtil.getTime()); // 刷新过期时间
 //							session.setAttribute(token, loginObj);
 //							inv.invoke();

@@ -41,11 +41,11 @@ public class BeeneedleObjectLabelController  extends Controller {
                     " from " + tableName);
             List<ObjectLabel> list = paginate.getList();
             JSONArray postList = new JSONArray();
-            for (ObjectLabel processSubject : list) {
-                String[] Names = processSubject._getAttrNames();
+            for (ObjectLabel objectLabel : list) {
+                String[] Names = objectLabel._getAttrNames();
                 JSONObject obj = new JSONObject();
                 for (String param : Names) {
-                    Object object = processSubject.get(param);
+                    Object object = objectLabel.get(param);
                     obj.put(param, object);
                 }
                 postList.put(obj);
@@ -58,6 +58,32 @@ public class BeeneedleObjectLabelController  extends Controller {
             renderJson(jsonObj.toString());
         }
 
+    }
+
+    public void post() {
+        Map<String, Object> json = MyUtil.getJsonData(getRequest());
+        String ids = MyUtil.getRandomString();
+        ObjectLabel bean = getBean(ObjectLabel.class);
+        bean.setIds(ids);
+        for(String key : json.keySet()){
+            Object value = json.get(key);
+            bean.set(key, value);
+        }
+        bean.save();
+        JSONObject jsonObj = MyUtil.getJson("成功", 200, "");
+        renderJson(jsonObj.toString());
+    }
+
+    public void put() {
+        Map<String, Object> json = MyUtil.getJsonData(getRequest());
+        ObjectLabel bean = getBean(ObjectLabel.class);
+        for(String key : json.keySet()){
+            Object value = json.get(key);
+            bean.set(key, value);
+        }
+        bean.update();
+        JSONObject jsonObj = MyUtil.getJson("成功", 200, "");
+        renderJson(jsonObj.toString());
     }
 
     public void delete() {
