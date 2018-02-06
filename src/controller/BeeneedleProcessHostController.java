@@ -34,7 +34,7 @@ public class BeeneedleProcessHostController extends Controller {
 			JSONArray postList = new JSONArray();
 			for (ProcessHost processHost : list) {
 				String[] Names = processHost._getAttrNames();
-				System.out.println(Names.toString());
+//				System.out.println(Names.toString());
 				JSONObject obj = new JSONObject();
 				for (String param : Names) {
 					Object object = processHost.get(param);

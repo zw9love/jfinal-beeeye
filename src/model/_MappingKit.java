@@ -28,5 +28,7 @@ public class _MappingKit {
 		arp.addMapping("beeneedle_process_subject", "ids", ProcessSubject.class);
 		arp.addMapping("beeneedle_object_label", "ids", ObjectLabel.class);
 		arp.addMapping("beeneedle_process_host", "ids", ProcessHost.class);
+		arp.addMapping("beeneedle_object_host", "ids", ObjectHost.class);
+		arp.addMapping("beeneedle_integrity", "ids", Integrity.class);
 	}
 }

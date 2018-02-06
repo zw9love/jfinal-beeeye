@@ -3,6 +3,8 @@ package controller;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import model.ObjectHost;
 import model.ObjectLabel;
 import model.ProcessSubject;
 import org.json.JSONArray;
@@ -58,6 +60,32 @@ public class BeeneedleObjectLabelController  extends Controller {
             renderJson(jsonObj.toString());
         }
 
+    }
+
+    public void getHost() throws JSONException {
+        Map<String, Object> json = MyUtil.getJsonData(getRequest());
+        String ids = (String) json.get("ids");
+        JSONObject jsonObj;
+        if (ids == null) {
+            jsonObj = MyUtil.getJson("请传递objectIds", 606, "");
+            renderJson(jsonObj.toString());
+        } else {
+            String sql = " select * from beeneedle_object_host where object_ids = ? ";
+            List<Record> list = Db.find(sql, ids);
+            JSONArray postList = new JSONArray();
+            for (Record item : list) {
+                String[] Names = item.getColumnNames();
+//                System.out.println(Names.toString());
+                JSONObject obj = new JSONObject();
+                for (String param : Names) {
+                    Object object = item.get(param);
+                    obj.put(param, object);
+                }
+                postList.put(obj);
+            }
+            jsonObj = MyUtil.getJson("成功", 200, postList);
+            renderJson(jsonObj.toString());
+        }
     }
 
     public void post() {
