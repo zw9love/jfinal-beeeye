@@ -30,5 +30,7 @@ public class _MappingKit {
 		arp.addMapping("beeneedle_process_host", "ids", ProcessHost.class);
 		arp.addMapping("beeneedle_object_host", "ids", ObjectHost.class);
 		arp.addMapping("beeneedle_integrity", "ids", Integrity.class);
+		arp.addMapping("beeeye_baseline_win", "ids", WindowsSafeLib.class);
+		arp.addMapping("beeeye_baseline_linux", "ids", LinuxSafeLib.class);
 	}
 }

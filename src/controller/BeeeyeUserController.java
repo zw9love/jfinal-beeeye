@@ -15,16 +15,25 @@ import com.jfinal.plugin.activerecord.Page;
 import model.User;
 import util.MyUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public class BeeeyeUserController extends Controller {
 	private static final User dao = new User().dao();
 
 	@SuppressWarnings("unchecked")
 	public void get() throws JSONException {
-		Map<String, Object> json = MyUtil.getJsonData(getRequest());
+        HttpServletRequest request = getRequest();
+        HttpSession session = getSession();
+        String token = request.getHeader("token");
+        JSONObject role = (JSONObject) session.getAttribute(token);
+		Map<String, Object> json = MyUtil.getJsonData(request);
 		Map<String, Object> page = (Map<String, Object>) json.get("page");
-		int pageNumber = (int) Double.parseDouble(page.get("pageNumber").toString());
+        String username = (String) role.get("username");
+        String where = " where username = '" + username + "'";
+        int pageNumber = (int) Double.parseDouble(page.get("pageNumber").toString());
 		int pageSize = (int) Double.parseDouble(page.get("pageSize").toString());
-		Page<User> paginate = dao.paginate(pageNumber, pageSize, "select *", "from common_user");
+		Page<User> paginate = dao.paginate(pageNumber, pageSize, "select *", " from common_user" + where);
 		List<User> list = paginate.getList();
 		JSONArray postList = new JSONArray();
 		for (User user : list) {

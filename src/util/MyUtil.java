@@ -105,7 +105,24 @@ public class MyUtil {
             e.printStackTrace();
         }
         String str = sb.toString();
-        List<String> list = new Gson().fromJson(str, new TypeToken<List<String>>() {
+        List<String> list = new Gson().fromJson(str, new TypeToken<List<Object>>() {
+        }.getType());
+        return list;
+    }
+
+    public static List<Map<String, Object>> getListMapData(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = request.getReader()) {
+            char[] buff = new char[1024];
+            int len;
+            while ((len = reader.read(buff)) != -1) {
+                sb.append(buff, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String str = sb.toString();
+        List<Map<String, Object>> list = new Gson().fromJson(str, new TypeToken<List<Map<String, Object>>>() {
         }.getType());
         return list;
     }
