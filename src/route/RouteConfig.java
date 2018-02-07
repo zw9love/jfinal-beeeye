@@ -83,6 +83,7 @@ public class RouteConfig extends JFinalConfig {
 		me.add("/bl/win", BeeeyeWindowsSafeLibController.class);
 		me.add("/bl/linux", BeeeyeLinuxSafeLibController.class);
 		me.add("/hostTh", BeeeyeThresholdController.class);
+		me.add("/audit/output", BeeeyeAuditOutController.class);
 	}
 
 	public void configEngine(Engine me) {

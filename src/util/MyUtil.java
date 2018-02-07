@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.jfinal.plugin.activerecord.Db;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -128,6 +129,6 @@ public class MyUtil {
     }
 
     public static int getTime() {
-        return Math.round(new Date().getTime() / 1000) + 30 * 60;
+        return (int) Math.floor(new Date().getTime() / 1000) + 30 * 60;
     }
 }

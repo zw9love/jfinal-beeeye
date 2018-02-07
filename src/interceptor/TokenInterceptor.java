@@ -29,7 +29,13 @@ public class TokenInterceptor implements Interceptor {
 		} else {
 			Controller controller = inv.getController();
 			HttpServletRequest request = controller.getRequest();
-			String token = request.getHeader("token");
+			String method = request.getMethod().toLowerCase();
+			String token;
+			if(method.equals("get")){
+				token = controller.getPara("token");
+			}else{
+				token = request.getHeader("token");
+			}
 			if (token.equals("debug")) {
 				inv.invoke();
 			} else {
@@ -48,7 +54,7 @@ public class TokenInterceptor implements Interceptor {
 //						int nowTime = Math.round(new Date().getTime() / 1000);
 //						int expireTime = (int)loginObj.get("expireTime");
 //						// 两个token值相同
-//						if(sessionToken.equals(token) && expireTime >= nowTime){
+//						if(sessionToken.equals(token)) && expireTime >= nowTime){
 //							loginObj.put("expireTime", MyUtil.getTime()); // 刷新过期时间
 //							session.setAttribute(token, loginObj);
 //							inv.invoke();
