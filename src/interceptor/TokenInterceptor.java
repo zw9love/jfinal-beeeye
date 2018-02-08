@@ -55,7 +55,7 @@ public class TokenInterceptor implements Interceptor {
 //						int expireTime = (int)loginObj.get("expireTime");
 //						// 两个token值相同
 //						if(sessionToken.equals(token)) && expireTime >= nowTime){
-//							loginObj.put("expireTime", MyUtil.getTime()); // 刷新过期时间
+//							loginObj.put("expireTime", MyUtil.getRefreshTime()); // 刷新过期时间
 //							session.setAttribute(token, loginObj);
 //							inv.invoke();
 //						}else{

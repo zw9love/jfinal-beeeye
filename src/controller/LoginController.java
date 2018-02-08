@@ -45,10 +45,8 @@ public class LoginController extends Controller {
                 for (String key : map.keySet()) {
                     obj.put(key, map.get(key));
                 }
-                int expireTime = MyUtil.getTime();
+                int expireTime = MyUtil.getRefreshTime();
                 obj.put("expireTime", expireTime);
-//            System.out.println(expireTime);
-                // System.out.println(obj.toString());
                 HttpSession session = getSession();
                 String token = MyUtil.getRandomString();
                 session.setAttribute(token, obj);

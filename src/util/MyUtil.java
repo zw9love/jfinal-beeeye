@@ -133,10 +133,20 @@ public class MyUtil {
     }
 
     public static int getTime() {
+        return (int) Math.floor(new Date().getTime() / 1000);
+    }
+
+    public static int getRefreshTime(){
         return (int) Math.floor(new Date().getTime() / 1000) + 30 * 60;
     }
 
-    // 测试可用
+    /**
+     *
+     * @param title 邮件主题
+     * @param receiveName 收件人
+     * @param content 发送内容
+     * @throws Exception
+     */
     public static void sentMail(String title, String receiveName, String content) throws Exception{
 
         // 发件人的 邮箱 和 密码（替换为自己的邮箱和密码）
