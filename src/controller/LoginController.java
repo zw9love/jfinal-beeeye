@@ -54,10 +54,8 @@ public class LoginController extends Controller {
                 jsonObj = MyUtil.getJson("成功", 200, "");
                 HttpServletResponse response = getResponse();
                 response.setHeader("token", token);
-                renderJson(jsonObj.toString());
             } else {
                 jsonObj = MyUtil.getJson("账号或者密码错误。", 606, "");
-                renderJson(jsonObj.toString());
             }
             renderJson(jsonObj.toString());
         }
