@@ -25,7 +25,7 @@ public class BeeeyeMenuController extends Controller {
 		JSONArray postList = new JSONArray();
 		for (Menu menu : list) {
 			String[] Names = menu._getAttrNames();
-			System.out.println(Names.toString());
+//			System.out.println(Names.toString());
 			JSONObject obj = new JSONObject();
 			for (String param : Names) {
 				Object object = menu.get(param);

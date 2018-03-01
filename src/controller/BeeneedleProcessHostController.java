@@ -68,7 +68,7 @@ public class BeeneedleProcessHostController extends Controller {
 									+ "'), ";
 					insertSql += str;
 				}
-				System.out.println(insertSql);
+//				System.out.println(insertSql);
 				int updateRow = Db.update(insertSql);
 				if (updateRow >= 0)
 					jsonObj = MyUtil.getJson("成功", 200, "");

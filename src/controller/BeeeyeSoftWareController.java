@@ -85,8 +85,8 @@ public class BeeeyeSoftWareController extends Controller {
         UploadFile file = null;
         try {
             file = getFile();
-            System.out.println(file.getFileName());
-            System.out.println(file.getUploadPath());
+//            System.out.println(file.getFileName());
+//            System.out.println(file.getUploadPath());
             String platformIds = getPara("platform_ids");
             String groupName = getPara("group_name");
             String version = getPara("version");

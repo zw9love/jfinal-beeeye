@@ -39,7 +39,7 @@ public class BeeeyeHostController extends Controller {
             renderJson(jsonObj.toString());
         } else {
             Map<String, Object> json = MyUtil.getJsonData(getRequest());
-            System.out.println(json);
+//            System.out.println(json);
             if(json == null || json.isEmpty()){
                 List<Host> list = dao.find("select * from " + tableName);
                 JSONArray postList = new JSONArray();

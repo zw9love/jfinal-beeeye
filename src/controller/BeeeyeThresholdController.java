@@ -27,7 +27,7 @@ public class BeeeyeThresholdController extends Controller {
         JSONArray postList = new JSONArray();
         for (Threshold item : list) {
             String[] Names = item._getAttrNames();
-            System.out.println(Names.toString());
+//            System.out.println(Names.toString());
             JSONObject obj = new JSONObject();
             for (String param : Names) {
                 if(param.equals("threshold_ids")){
@@ -82,7 +82,7 @@ public class BeeeyeThresholdController extends Controller {
             index++;
         }
         String sql = update + value + where;
-        System.out.println(sql);
+//        System.out.println(sql);
         int effectCount = Db.update(sql);
         if (effectCount >= 0)
             jsonObj = MyUtil.getJson("成功", 200, "");

@@ -73,8 +73,8 @@ public class BeeeyePelfController extends Controller {
                     List<Map<String, Object>> sort = (List<Map<String, Object>>) json.get("sort");
                     String querySql = " ", sortSql = " ";
 
-                    System.out.println("query = " + query);
-                    System.out.println("sort = " + sort);
+//                    System.out.println("query = " + query);
+//                    System.out.println("sort = " + sort);
                     if(query != null){
                         for(String key : query.keySet()){
                             Object value = query.get(key);
@@ -94,7 +94,7 @@ public class BeeeyePelfController extends Controller {
                     String where = " where pelfstatus = '" + pelfstatus + "' and host_ids = '" + hostIds + "'" + querySql + sortSql;
                     String limit = " limit " + pageStart + " , " + pageSize;
                     String sql = select + where + limit;
-                    System.out.println(sql);
+//                    System.out.println(sql);
 //                    Number total = Db.queryNumber(count + where + limit);
 //                    System.out.println("数量：" + total);
 //                    List<Pelf> list = dao.find(sql);

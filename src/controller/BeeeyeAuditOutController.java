@@ -142,7 +142,7 @@ public class BeeeyeAuditOutController extends Controller {
                     break;
             }
             outputSql = "select * from " + tempName + where + " into outfile '" + (path + item + tempIds) + "' fields terminated by " + " ',' " + " optionally enclosed by '' lines terminated by '\\r\\n';";
-            System.out.println(outputSql);
+//            System.out.println(outputSql);
             index++;
             importFile(userIds, path, item + tempIds, nowTime, item);
             Db.queryInt(outputSql);

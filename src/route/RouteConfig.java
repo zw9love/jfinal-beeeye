@@ -54,7 +54,7 @@ public class RouteConfig extends JFinalConfig {
 		me.setDevMode(PropKit.getBoolean("devMode", false));
 		String systemName = System.getProperty("os.name");
 		if(systemName.toLowerCase().contains("windows")){
-			System.out.println("windows操作系统");
+//			System.out.println("windows操作系统");
 			me.setBaseUploadPath("C:\\jfinal-beeeye\\upload");
 		}else{
 			me.setBaseUploadPath("/usr/local/share/lpdata/tomcat/webapp");
